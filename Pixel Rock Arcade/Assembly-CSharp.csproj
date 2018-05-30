@@ -59,7 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\exampleScript.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameInput.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameplayManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteData.cs" />
