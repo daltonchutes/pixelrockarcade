@@ -59,20 +59,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NoteHit.cs" />
-    <Compile Include="Assets\NoteMiss.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameInput.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameplayManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteData.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NoteHit.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\NoteMiss.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteScript.cs" />
     <Compile Include="Assets\Scripts\Gameplay\RhythmManager.cs" />
     <Compile Include="Assets\Scripts\Tools\Resize.cs" />
     <None Include="Assets\Koreographer\ReadMe.txt" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>D:/Pixel Rock Arcade/Project/Pixel Rock Arcade/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>D:/Pixel Rock Arcade/Project/pixelrockarcade/Pixel Rock Arcade/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/Pixel Rock Arcade/Project/Pixel Rock Arcade/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/Pixel Rock Arcade/Project/pixelrockarcade/Pixel Rock Arcade/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -264,7 +264,7 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="SonicBloom.Koreo">
-      <HintPath>D:/Pixel Rock Arcade/Project/Pixel Rock Arcade/Assets/Plugins/Koreographer/Unity Editor/SonicBloom.Koreo.dll</HintPath>
+      <HintPath>D:/Pixel Rock Arcade/Project/pixelrockarcade/Pixel Rock Arcade/Assets/Plugins/Koreographer/Unity Editor/SonicBloom.Koreo.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/dalto/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
