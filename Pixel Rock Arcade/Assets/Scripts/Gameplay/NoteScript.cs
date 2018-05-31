@@ -12,24 +12,21 @@ public class NoteScript : MonoBehaviour {
 
     public char mColor;
 
-	// Use this for initialization
-	void Start () {
-        
-	}
+
 
     public void Initialize(float velocity, int start_time, char color, Transform cruncher)
     {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
-        switch (mColor)
+        switch (color)
         {
             case 'G':
-                mesh.material = Resources.Load("/Materials/green") as Material;
+                mesh.material = Resources.Load("Materials/green") as Material;
                 break;
             case 'R':
-                mesh.material = Resources.Load("/Materials/red") as Material;
+                mesh.material = Resources.Load("Materials/red") as Material;
                 break;
             case 'Y':
-                mesh.material = Resources.Load("/Materials/yellow") as Material;
+                mesh.material = Resources.Load("Materials/yellow") as Material;
                 break;
         }
 
@@ -40,11 +37,13 @@ public class NoteScript : MonoBehaviour {
         mParentTransform = cruncher;
         transform.position = cruncher.position;
         transform.Translate(cruncher.up * 2);
-        transform.parent = Camera.main.transform.parent;
+        transform.parent = Camera.main.transform.parent.Find("FretParent");
     }
 	
-	// Update is called once per frame
+
 	void Update () {
         transform.position = Vector3.MoveTowards(transform.position, mParentTransform.position - mParentTransform.up, mVelocity * Time.deltaTime);
-	}
+
+
+    }
 }
