@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371083da18594b649b0106a0f74e7608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: {x: 125, y: 225, z: 150}
-  axis: {x: 0, y: 1, z: 0}
+  amount: {x: 8000, y: 20000, z: 15000}
+  axis: {x: 0, y: 1, z: 1}
 --- !u!114 &114942094650963978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,7 +114,6 @@ MonoBehaviour:
   mParentTransform: {fileID: 0}
   mStartTime: 0
   mColor: 0
-  mScaleAmount: {x: 125, y: 225, z: 150}
 --- !u!135 &135318589936225282
 SphereCollider:
   m_ObjectHideFlags: 1

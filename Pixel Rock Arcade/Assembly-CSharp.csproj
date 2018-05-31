@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Gameplay\NoteScript.cs" />
     <Compile Include="Assets\Scripts\Gameplay\RhythmManager.cs" />
     <Compile Include="Assets\Scripts\Tools\Resize.cs" />
+    <Compile Include="Assets\Scripts\Tools\SetScreenPosition.cs" />
     <None Include="Assets\Koreographer\ReadMe.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Pixel Rock Arcade/Project/pixelrockarcade/Pixel Rock Arcade/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

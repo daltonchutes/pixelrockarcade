@@ -46,6 +46,7 @@ public class GameInput : MonoBehaviour {
             for (int i = 0; i < mTouches.Length; i++)
             {
                 Touch touch = mTouches[i];
+                
                 foreach(KeyValuePair<char, GameObject> button in mButtons)
                 {
                     if (touch.phase == TouchPhase.Began)

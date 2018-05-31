@@ -15,9 +15,7 @@ public class Resize : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        float height = Camera.main.orthographicSize * 2;
-        float width = height * Screen.width / Screen.height;
-        Vector2 screenSizes = new Vector2(width, height);
+        Vector2 screenSizes = new Vector2(Screen.width, Screen.height);
 
         Vector3 scale = Vector3.one;
 
@@ -28,11 +26,15 @@ public class Resize : MonoBehaviour {
                 scale[i] = screenSizes[(int)axis[i]] / amount[i];
             }
         }
+        if (GetComponent<RectTransform>() != null)
+            GetComponent<RectTransform>().sizeDelta = scale;
+        else
+            transform.localScale = scale;
 
 
-        
-        transform.localScale = scale;
-        
-	}
+        Vector3 screen2World = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 100f));
+        transform.localScale = new Vector3(screen2World.x / amount[0], 1, 1);
+
+    }
 	
 }
