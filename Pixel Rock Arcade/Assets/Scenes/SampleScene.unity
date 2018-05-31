@@ -15189,5 +15189,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371083da18594b649b0106a0f74e7608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: {x: 1, y: 1, z: 1}
+  amount: {x: 50, y: 1, z: 1}
   axis: {x: 0, y: 1, z: 0}
