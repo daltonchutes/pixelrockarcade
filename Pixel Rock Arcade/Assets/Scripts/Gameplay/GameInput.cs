@@ -8,7 +8,10 @@ public class GameInput : MonoBehaviour {
     RhythmManager mRhythmManager;
 
     [SerializeField]
-    private float mNoteHitThreshold = .1f;
+    private float mNoteBeforeHitThreshold = .2f;
+
+    [SerializeField]
+    private float mNoteAfterHitThreshold = .3f;
 
     [SerializeField]
     private GameObject mGreenButton;
@@ -32,7 +35,8 @@ public class GameInput : MonoBehaviour {
         mButtons['R'] = mRedButton;
         mButtons['Y'] = mYellowButton;
 
-        mNoteHitThreshold *= 44100;
+        mNoteBeforeHitThreshold *= 44100;
+        mNoteAfterHitThreshold *= 44100;
     }
 	
 
@@ -74,7 +78,7 @@ public class GameInput : MonoBehaviour {
         if (mRhythmManager.mSpawnedNotes[lane].Count > 0)
         {
             int nextNoteTime = mRhythmManager.mSpawnedNotes[lane].Peek().GetComponent<NoteScript>().mStartTime;
-            if (mRhythmManager.mKoreo.GetLatestSampleTime() + mNoteHitThreshold >= nextNoteTime && nextNoteTime >= mRhythmManager.mKoreo.GetLatestSampleTime() - mNoteHitThreshold)
+            if (mRhythmManager.mKoreo.GetLatestSampleTime() + mNoteBeforeHitThreshold >= nextNoteTime && nextNoteTime >= mRhythmManager.mKoreo.GetLatestSampleTime() - mNoteAfterHitThreshold)
                 return true;
         }
         return false;

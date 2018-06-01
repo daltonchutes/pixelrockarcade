@@ -21,6 +21,7 @@ public class NoteMiss : MonoBehaviour {
     {
         if (other.CompareTag("Note"))
         {
+            print("MISS");
             mRhythmManager.mSpawnedNotes[other.GetComponent<NoteScript>().mColor].Dequeue();
             Destroy(other.gameObject);
         }

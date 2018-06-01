@@ -5005,7 +5005,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec804b67d446e004b812aed519f10dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mNoteHitThreshold: 0.25
+  mNoteBeforeHitThreshold: 0.3
+  mNoteAfterHitThreshold: 0.3
   mGreenButton: {fileID: 1744241268}
   mRedButton: {fileID: 1489683476}
   mYellowButton: {fileID: 916240993}
@@ -15189,5 +15190,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371083da18594b649b0106a0f74e7608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: {x: 50, y: 1, z: 1}
+  amount: {x: 40, y: 1, z: 1}
   axis: {x: 0, y: 1, z: 0}

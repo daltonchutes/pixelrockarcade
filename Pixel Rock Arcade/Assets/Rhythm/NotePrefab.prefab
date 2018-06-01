@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371083da18594b649b0106a0f74e7608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: {x: 8000, y: 20000, z: 15000}
+  amount: {x: 800, y: 2000, z: 1500}
   axis: {x: 0, y: 1, z: 1}
 --- !u!114 &114942094650963978
 MonoBehaviour:

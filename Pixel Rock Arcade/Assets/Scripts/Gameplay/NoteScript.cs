@@ -37,11 +37,13 @@ public class NoteScript : MonoBehaviour {
         mParentTransform = cruncher;
         transform.position = cruncher.position;
         transform.Translate(cruncher.up * 2);
+        transform.LookAt(mParentTransform);
         transform.parent = Camera.main.transform.parent.Find("FretParent");
     }
 	
 
 	void Update () {
+        transform.LookAt(mParentTransform);
         transform.position = Vector3.MoveTowards(transform.position, mParentTransform.position - mParentTransform.up, mVelocity * Time.deltaTime);
 
 
