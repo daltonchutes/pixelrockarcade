@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class NoteMiss : MonoBehaviour {
 
-    [SerializeField]
-    private RhythmManager mRhythmManager;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +20,7 @@ public class NoteMiss : MonoBehaviour {
         if (other.CompareTag("Note"))
         {
             print("MISS");
-            mRhythmManager.mSpawnedNotes[other.GetComponent<NoteScript>().mColor].Dequeue();
+            RhythmManager.instance.mSpawnedNotes[other.GetComponent<NoteScript>().mColor].Dequeue();
             Destroy(other.gameObject);
         }
     }

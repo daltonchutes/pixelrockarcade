@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteHit : MonoBehaviour {
+public class NoteHit : UIButton {
 
-    [SerializeField]
     private RhythmManager mRhythmManager;
 
     [SerializeField]
@@ -12,22 +11,52 @@ public class NoteHit : MonoBehaviour {
 
     private ParticleSystem mParticle;
 
-    // Use this for initialization
-    void Start () {
-        mParticle = GetComponent<ParticleSystem>();
-	}
+    
+    private int mNoteBeforeHitThreshold;
+
+    private int mNoteAfterHitThreshold;
+
+    public void Initialize()
+    {
+        mParticle = GameObjectsScript.instance.mNoteCrunchers[mLaneColor].GetComponent<ParticleSystem>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    public void HitNote()
+    public void SetThreshold(float before, float after)
     {
-        if (mRhythmManager.mSpawnedNotes[mLaneColor].Count > 0)
+        mNoteBeforeHitThreshold = (int)(before * 44100);
+        mNoteAfterHitThreshold = (int)(after * 44100);
+    }
+    public override void OnButtonTouch()
+    {
+        base.OnButtonTouch();
+        print(mLaneColor);
+        if (CheckIfNoteIsClose(mLaneColor))
+            HitNote();
+    }
+
+    private void HitNote()
+    {
+        if (RhythmManager.instance.mSpawnedNotes[mLaneColor].Count > 0)
         {
-            Destroy(mRhythmManager.mSpawnedNotes[mLaneColor].Dequeue());
+            Destroy(RhythmManager.instance.mSpawnedNotes[mLaneColor].Dequeue());
             mParticle.Emit(10);
         }
+    }
+
+
+    private bool CheckIfNoteIsClose(char lane)
+    {
+        if (RhythmManager.instance.mSpawnedNotes[lane].Count > 0)
+        {
+            int nextNoteTime = RhythmManager.instance.mSpawnedNotes[lane].Peek().GetComponent<NoteScript>().mStartTime;
+            if (RhythmManager.instance.mKoreo.GetLatestSampleTime() + mNoteBeforeHitThreshold >= nextNoteTime && nextNoteTime >= RhythmManager.instance.mKoreo.GetLatestSampleTime() - mNoteAfterHitThreshold)
+                return true;
+        }
+        return false;
     }
 }

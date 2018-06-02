@@ -5,22 +5,12 @@ using SonicBloom.Koreo;
 
 public class RhythmManager : MonoBehaviour {
 
+    public static RhythmManager instance;
+
     [SerializeField]
     private GameObject mNotePrefab;
-
-    [SerializeField]
-    private Transform mCameraTransform;
-
-
-    [SerializeField]
-    private Transform mGreenNoteCruncher;
-    [SerializeField]
-    private Transform mRedNoteCruncher;
-    [SerializeField]
-    private Transform mYellowNoteCruncher;
     
-    Dictionary<char, Transform> mNoteCrunchers = new Dictionary<char, Transform>();
-
+    
 
     private Dictionary<char, Queue<NoteDataObject>> mNotesToSpawn = new Dictionary<char, Queue<NoteDataObject>>();
 
@@ -31,7 +21,11 @@ public class RhythmManager : MonoBehaviour {
     int mNoteToHitTravelTime = 0;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+
+        instance = this;
+        
+
         mNotesToSpawn['R'] = new Queue<NoteDataObject>();
         mNotesToSpawn['G'] = new Queue<NoteDataObject>();
         mNotesToSpawn['Y'] = new Queue<NoteDataObject>();
@@ -40,16 +34,19 @@ public class RhythmManager : MonoBehaviour {
         mSpawnedNotes['G'] = new Queue<GameObject>();
         mSpawnedNotes['Y'] = new Queue<GameObject>();
 
+        
+    }
+
+    public void Initialize()
+    {
         mKoreo = Koreographer.Instance.GetKoreographyAtIndex(0);
 
-        mNoteCrunchers['R'] = mRedNoteCruncher;
-        mNoteCrunchers['G'] = mGreenNoteCruncher;
-        mNoteCrunchers['Y'] = mYellowNoteCruncher;
+        mNoteToHitTravelTime = 2 * 1 * 44100;
 
         InitializeNotes();
-
-        mNoteToHitTravelTime = 2 * 1 * 44100;
-	}
+        
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -65,12 +62,11 @@ public class RhythmManager : MonoBehaviour {
                 }
             }
         }
+
+
+        
 	}
 
-    public Dictionary<char, Transform> GetNoteCrunchers()
-    {
-        return mNoteCrunchers;
-    }
 
     private void spawnNote(char color, float velocity, int start_time)
     {
@@ -78,7 +74,7 @@ public class RhythmManager : MonoBehaviour {
         
         NoteScript newScript = newNote.GetComponent<NoteScript>();
         
-        newScript.Initialize(velocity, start_time, color, mNoteCrunchers[color]);
+        newScript.Initialize(velocity, start_time, color, GameObjectsScript.instance.mNoteCrunchers[color].transform);
         mSpawnedNotes[color].Enqueue(newNote);
     }
 
