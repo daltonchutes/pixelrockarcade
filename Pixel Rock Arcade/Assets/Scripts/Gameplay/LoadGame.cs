@@ -33,6 +33,9 @@ public class LoadGame : MonoBehaviour {
         RhythmManager.instance.Initialize();
         RhythmManager.instance.transform.GetComponent<GameInput>().Initialize();
         GameplayManager.instance.Initialize();
+
+        //Screen.autorotateToLandscapeLeft = false;
+        //Screen.autorotateToLandscapeRight = false;
     }
 
 

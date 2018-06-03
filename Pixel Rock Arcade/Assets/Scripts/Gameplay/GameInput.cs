@@ -28,6 +28,7 @@ public class GameInput : MonoBehaviour {
     public void Initialize()
     {
         mButtons[GameplayManager.GameplayState.PLAYING] = new List<GameObject>();
+        mButtons[GameplayManager.GameplayState.PAUSED] = new List<GameObject>();
         mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("GreenButton").gameObject);
         mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("RedButton").gameObject);
         mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("YellowButton").gameObject);
@@ -35,36 +36,36 @@ public class GameInput : MonoBehaviour {
         mButtons[GameplayManager.GameplayState.PLAYING][1].GetComponent<NoteHit>().SetThreshold(mNoteBeforeHitThreshold, mNoteAfterHitThreshold);
         mButtons[GameplayManager.GameplayState.PLAYING][2].GetComponent<NoteHit>().SetThreshold(mNoteBeforeHitThreshold, mNoteAfterHitThreshold);
         mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("PauseButton").gameObject);
+
+        mButtons[GameplayManager.GameplayState.PAUSED].Add(GameplayCanvasScript.instance.transform.Find("PauseButton").gameObject); //temporary
     }
 	
 
 
 	// Update is called once per frame
 	void Update () {
-        if (GameplayManager.instance.mGameplayState == GameplayManager.GameplayState.PLAYING)
+        if (Input.touchCount > 0)
         {
-            if (Input.touchCount > 0)
+            print("touched");
+            Touch[] mTouches = Input.touches;
+
+            for (int i = 0; i < mTouches.Length; i++)
             {
-                print("touched");
-                Touch[] mTouches = Input.touches;
+                Touch touch = mTouches[i];
 
-                for (int i = 0; i < mTouches.Length; i++)
+                foreach (GameObject button in mButtons[GameplayManager.instance.mGameplayState])
                 {
-                    Touch touch = mTouches[i];
-
-                    foreach (GameObject button in mButtons[GameplayManager.instance.mGameplayState])
+                    if (touch.phase == TouchPhase.Began)
                     {
-                        if (touch.phase == TouchPhase.Began)
+                        if (RectTransformUtility.RectangleContainsScreenPoint(button.GetComponent<RectTransform>(), touch.position))
                         {
-                            if (RectTransformUtility.RectangleContainsScreenPoint(button.GetComponent<RectTransform>(), touch.position))
-                            {
-                                button.GetComponent<UIButton>().OnButtonTouch();
-                            }
+                            button.GetComponent<UIButton>().OnButtonTouch();
                         }
                     }
                 }
             }
         }
+        
         
 	}
 
