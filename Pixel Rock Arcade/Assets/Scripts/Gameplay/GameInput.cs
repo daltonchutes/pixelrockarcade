@@ -57,9 +57,11 @@ public class GameInput : MonoBehaviour {
                 {
                     if (touch.phase == TouchPhase.Began)
                     {
-                        if (RectTransformUtility.RectangleContainsScreenPoint(button.GetComponent<RectTransform>(), touch.position))
+                        RectTransform buttonRect = button.GetComponent<RectTransform>();
+                        if (RectTransformUtility.RectangleContainsScreenPoint(buttonRect, touch.position))
                         {
-                            button.GetComponent<UIButton>().OnButtonTouch();
+                            button.GetComponent<UIButton>().OnButtonTouch(touch, buttonRect);
+                            //break loop here   
                         }
                     }
                 }

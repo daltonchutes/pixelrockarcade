@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIButton : MonoBehaviour {
 
-	public virtual void OnButtonTouch()
+	public virtual void OnButtonTouch(Touch touch, RectTransform buttonTrans)
     {
 
     }

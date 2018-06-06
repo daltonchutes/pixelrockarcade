@@ -17,9 +17,9 @@ public class GamePauseButton : UIButton {
 		
 	}
 
-    public override void OnButtonTouch()
+    public override void OnButtonTouch(Touch touch, RectTransform buttonTrans)
     {
-        base.OnButtonTouch();
+        base.OnButtonTouch(touch, buttonTrans);
         switch (GameplayManager.instance.mGameplayState)
         {
             case GameplayManager.GameplayState.PLAYING:

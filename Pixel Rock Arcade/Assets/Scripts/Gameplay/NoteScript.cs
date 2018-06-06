@@ -13,6 +13,11 @@ public class NoteScript : MonoBehaviour {
     public char mColor;
 
 
+    public char mType = 'R';    //regular by default
+
+    public int mLength = 0;
+
+
 
     public void Initialize(float velocity, int start_time, char color, Transform cruncher)
     {
@@ -40,12 +45,14 @@ public class NoteScript : MonoBehaviour {
         transform.LookAt(mParentTransform);
         transform.parent = Camera.main.transform.parent.Find("FretParent");
     }
+
 	
 
 	void Update () {
         transform.LookAt(mParentTransform);
-        transform.position = Vector3.MoveTowards(transform.position, mParentTransform.position - mParentTransform.up, mVelocity * Time.deltaTime);
-
+        // I have no idea why, but mParentTransform becomes null below this line. It's fine above it. Just not below. Weird.
+        if (mParentTransform != null)
+            transform.position = Vector3.MoveTowards(transform.position, mParentTransform.position - mParentTransform.up, mVelocity * Time.deltaTime);
 
     }
 }
