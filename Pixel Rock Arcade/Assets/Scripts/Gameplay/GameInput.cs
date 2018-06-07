@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class GameInput : MonoBehaviour {
 
+    public static GameInput instance;
 
     [SerializeField]
     private float mNoteBeforeHitThreshold = .2f;
@@ -12,14 +13,22 @@ public class GameInput : MonoBehaviour {
     [SerializeField]
     private float mNoteAfterHitThreshold = .3f;
 
-    
+    [HideInInspector]
+    public GameTouchController mGameTouchController;
 
-    Dictionary<GameplayManager.GameplayState, List<GameObject>> mButtons = new Dictionary<GameplayManager.GameplayState, List<GameObject>>();
+    private Dictionary<GameplayManager.GameplayState, List<GameObject>> mButtons = new Dictionary<GameplayManager.GameplayState, List<GameObject>>();
 
 
+    private void Awake()
+    {
+        instance = this;
+
+        mGameTouchController = GetComponent<GameTouchController>();
+    }
 
     // Use this for initialization
-    void Start () { 
+    void Start () {
+        
 
         mNoteBeforeHitThreshold *= 44100;
         mNoteAfterHitThreshold *= 44100;
@@ -27,17 +36,21 @@ public class GameInput : MonoBehaviour {
 
     public void Initialize()
     {
+        GameObject greenButton = GameplayCanvasScript.instance.transform.Find("GreenButton").gameObject;
+        GameObject redButton = GameplayCanvasScript.instance.transform.Find("RedButton").gameObject;
+        GameObject yellowButton = GameplayCanvasScript.instance.transform.Find("YellowButton").gameObject;
+
         mButtons[GameplayManager.GameplayState.PLAYING] = new List<GameObject>();
         mButtons[GameplayManager.GameplayState.PAUSED] = new List<GameObject>();
-        mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("GreenButton").gameObject);
-        mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("RedButton").gameObject);
-        mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("YellowButton").gameObject);
-        mButtons[GameplayManager.GameplayState.PLAYING][0].GetComponent<NoteHit>().SetThreshold(mNoteBeforeHitThreshold, mNoteAfterHitThreshold);
-        mButtons[GameplayManager.GameplayState.PLAYING][1].GetComponent<NoteHit>().SetThreshold(mNoteBeforeHitThreshold, mNoteAfterHitThreshold);
-        mButtons[GameplayManager.GameplayState.PLAYING][2].GetComponent<NoteHit>().SetThreshold(mNoteBeforeHitThreshold, mNoteAfterHitThreshold);
+        
+        mButtons[GameplayManager.GameplayState.PLAYING].Add(greenButton);
+        mButtons[GameplayManager.GameplayState.PLAYING].Add(redButton);
+        mButtons[GameplayManager.GameplayState.PLAYING].Add(yellowButton);
         mButtons[GameplayManager.GameplayState.PLAYING].Add(GameplayCanvasScript.instance.transform.Find("PauseButton").gameObject);
-
         mButtons[GameplayManager.GameplayState.PAUSED].Add(GameplayCanvasScript.instance.transform.Find("PauseButton").gameObject); //temporary
+
+        mGameTouchController.SetThreshold(mNoteAfterHitThreshold, mNoteAfterHitThreshold);
+        mGameTouchController.Initialize(greenButton.GetComponent<RectTransform>(), redButton.GetComponent<RectTransform>(), yellowButton.GetComponent<RectTransform>());
     }
 	
 
@@ -46,7 +59,6 @@ public class GameInput : MonoBehaviour {
 	void Update () {
         if (Input.touchCount > 0)
         {
-            print("touched");
             Touch[] mTouches = Input.touches;
 
             for (int i = 0; i < mTouches.Length; i++)
@@ -61,7 +73,7 @@ public class GameInput : MonoBehaviour {
                         if (RectTransformUtility.RectangleContainsScreenPoint(buttonRect, touch.position))
                         {
                             button.GetComponent<UIButton>().OnButtonTouch(touch, buttonRect);
-                            //break loop here   
+                            continue; 
                         }
                     }
                 }

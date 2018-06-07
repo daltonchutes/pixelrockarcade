@@ -31,7 +31,7 @@ public class LoadGame : MonoBehaviour {
     {
         GameplayCanvasScript.instance.Initialize();
         RhythmManager.instance.Initialize();
-        RhythmManager.instance.transform.GetComponent<GameInput>().Initialize();
+        GameInput.instance.Initialize();
         GameplayManager.instance.Initialize();
 
         //Screen.autorotateToLandscapeLeft = false;

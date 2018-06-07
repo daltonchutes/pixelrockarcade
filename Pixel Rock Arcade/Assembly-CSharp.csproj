@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Gameplay\GamePauseButton.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameplayCanvasScript.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameplayManager.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\GameTouchController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\LoadGame.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteData.cs" />
     <Compile Include="Assets\Scripts\Gameplay\NoteHit.cs" />
